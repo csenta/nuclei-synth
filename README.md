@@ -1,5 +1,7 @@
 # NucleiSynth: Smart Nuclei Template Synthesizer
 
+> **Status:** prototype. A personal security-research project, not a production product. Expect rough edges; issues and pull requests are welcome.
+
 Automated pipeline that translates unstructured CVE advisories, bug bounty writeups, and HTTP PoCs into syntactically verified **Nuclei v3 YAML templates** with an autonomous self-correction loop.
 
 ---
@@ -56,3 +58,7 @@ Offline Engine Validation (`nuclei -validate`)
 [Pass] → Save YAML Template
 [Fail] → Feedback Error to Repair Loop → Retry
 ```
+
+## License
+
+MIT. See [LICENSE](LICENSE).

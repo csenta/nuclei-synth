@@ -12,11 +12,8 @@ import yaml
 
 def find_nuclei_binary() -> str | None:
     """Find the path to the nuclei executable."""
-    return shutil.which("nuclei") or (
-        "/home/emprogue/.local/bin/nuclei"
-        if os.path.exists("/home/emprogue/.local/bin/nuclei")
-        else None
-    )
+    local = os.path.join(os.path.expanduser("~"), ".local", "bin", "nuclei")
+    return shutil.which("nuclei") or (local if os.path.exists(local) else None)
 
 
 def validate_template(yaml_content: str) -> tuple[bool, str]:
